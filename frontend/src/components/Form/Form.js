@@ -8,7 +8,7 @@ import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
-  const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
+  const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -21,7 +21,12 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const clear = () => {
     setCurrentId(0);
-    setPostData({ title: '', message: '', tags: '', selectedFile: '' });
+    setPostData({
+      title: '',
+      message: '',
+      tags: '',
+      selectedFile: ''
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -31,9 +36,7 @@ const Form = ({ currentId, setCurrentId }) => {
       clear();
     }
     else {
-      const res = await dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
-      );
+      const res = await dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       clear();
     }
   };
@@ -48,7 +51,7 @@ const Form = ({ currentId, setCurrentId }) => {
     );
   }
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={6}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant="h6">
           {currentId ? `Editing "${post.title}"` : 'Creating a Memory'}
