@@ -5,7 +5,7 @@ import moment from 'moment';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import { getPost, getPostsBySearch } from '../../actions/posts';
-// import CommentSection from './CommentSection';
+import CommentSection from './CommentSection';
 import useStyles from './style';
 
 const Post = () => {
@@ -17,7 +17,7 @@ const Post = () => {
 
     useEffect(() => {
         dispatch(getPost(id));
-    }, [id, dispatch]);
+    }, [id]);
 
     useEffect(() => {
         if (post) {
@@ -46,7 +46,7 @@ const Post = () => {
                 <div className={classes.section}>
                     <Typography variant="h3" component="h2">{post.title}</Typography>
                     <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => (
-                        <Link to={`/tags/${tag}`} style={{ textDecoration: 'none', color: '#3f51b5' }}>
+                        <Link to={`/tags/${tag}`} style={{ textDecoration: 'none', color: '#3f51b5' }} key={tag}>
                             {` #${tag} `}
                         </Link>
                     ))}
@@ -62,14 +62,14 @@ const Post = () => {
                     <Divider style={{ margin: '20px 0' }} />
                     <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
                     <Divider style={{ margin: '20px 0' }} />
-                    {/* <CommentSection post={post} /> */}
+                    <CommentSection post={post} />
                     <Divider style={{ margin: '20px 0' }} />
                 </div>
                 <div className={classes.imageSection}>
                     <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
                 </div>
             </div>
-            {recommendedPosts.length && (
+            {!!recommendedPosts.length && (
                 <div className={classes.section}>
                     <Typography gutterBottom variant="h5">You might also like:</Typography>
                     <Divider />

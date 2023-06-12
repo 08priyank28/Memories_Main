@@ -12,7 +12,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
-  const history = useNavigate();
+  const history = useNavigate()
 
   useEffect(() => {
     if (post)
@@ -32,11 +32,12 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentId === 0) {
-      const res = await dispatch(createPost({ ...postData, name: user?.result?.name }, history));
+      const res = dispatch(createPost({ ...postData, name: user?.result?.name }, history));
+      console.log("after form");
       clear();
     }
     else {
-      const res = await dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+      const res = dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       clear();
     }
   };

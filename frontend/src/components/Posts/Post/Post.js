@@ -61,7 +61,6 @@ const Post = ({ post, setCurrentId }) => {
 
   const openPost = (e) => {
     // dispatch(getPost(post._id, history));
-
     history(`/posts/${post._id}`);
   };
 

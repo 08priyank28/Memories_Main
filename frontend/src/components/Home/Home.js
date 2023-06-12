@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
 import ChipInput from 'material-ui-chip-input'
 import { useDispatch } from 'react-redux';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
 import useStyles from './style';
-import { getPosts, getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch } from '../../actions/posts';
 import Pagination from '../Pagination';
 import { useNavigate, useLocation } from 'react-router-dom';
 
