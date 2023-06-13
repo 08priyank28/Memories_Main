@@ -9,7 +9,6 @@ import {
   END_LOADING,
   FETCH_POST,
   COMMENT,
-  FETCH_BY_CREATOR
 } from '../constants/actionTypes';
 
 import * as api from '../api/index.js';
